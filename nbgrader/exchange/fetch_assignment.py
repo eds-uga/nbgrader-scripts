@@ -123,6 +123,3 @@ class ExchangeFetchAssignment(Exchange):
             f.write(entry)
         return True
 
-
-
-
