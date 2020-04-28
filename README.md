@@ -18,3 +18,11 @@ Due to the world-readable nature of the nbgrader exchange, steps are taken on th
 ### `nbgrader`
 
 To install this change, you'll need to overwrite the `fetch_assignment.py` file in nbgrader to include a new function.
+
+Look at `$PYTHONPATH/lib/python3.7/site-packages/nbgrader/`, then go to the subdirectory `exchange/`. Put the new `fetch_assignment.py` file from this repository there (feel free to rename the old one, though modificaions in this file are clearly identified and easily removed by hand if you prefer).
+
+The modifications add a new function, `do_timed`, which only trigger if the assignment name (as identified in nbgrader) matches a hard-coded parameter list in the new function. Otherwise, it operates identically to the old version.
+
+If the assignment is listed as a timed one, then the new function kicks off by recording the fetch time in a uniquely-named file in the nbgrader exchange, according to the student account that fetched it. Each fetch is recorded and logged, and when paired with the assignment monitor that periodically checks these files for changes, instructors will have a near-complete record of the timeline of the assignment with some added robustness if the students should try to tamper with the timestamp files in the exchange.
+
+It isn't foolproof, but it's close.
